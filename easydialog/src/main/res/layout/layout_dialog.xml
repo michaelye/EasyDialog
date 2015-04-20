@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rlOutsideBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+    >
+
+    <!--android:background="@drawable/triangle_bottom"-->
+
+    <RelativeLayout
+        android:id="@+id/rlParentForAnimate"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <ImageView
+            android:id="@+id/ivTriangle"
+            android:layout_width="24dip"
+            android:layout_height="24dip"
+            />
+
+        <LinearLayout
+            android:id="@+id/llContent"
+            android:layout_width="wrap_content"
+            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@drawable/round_corner_bg"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

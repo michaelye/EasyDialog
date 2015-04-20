@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 提示框的背景色 -->
+    <color name="background_color_black">#bb000000</color>
+</resources>

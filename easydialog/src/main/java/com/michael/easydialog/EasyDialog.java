@@ -298,7 +298,7 @@ public class EasyDialog
     /**
      * 显示提示框
      */
-    public void show()
+    public EasyDialog show()
     {
         if (dialog != null)
         {
@@ -310,6 +310,7 @@ public class EasyDialog
             dialog.show();
             onDialogShowing();
         }
+        return this;
     }
 
     /**
@@ -455,7 +456,7 @@ public class EasyDialog
                 @Override
                 public void onAnimationEnd(Animator animation)
                 {
-                    dismiss();
+                    dialog.dismiss();
                 }
 
                 @Override
@@ -473,7 +474,7 @@ public class EasyDialog
         }
         else
         {
-            dismiss();
+            dialog.dismiss();
         }
     }
 
@@ -484,7 +485,7 @@ public class EasyDialog
     {
         if (dialog != null && dialog.isShowing())
         {
-            dialog.dismiss();
+            onDialogDismiss();
         }
     }
 
@@ -568,5 +569,14 @@ public class EasyDialog
             flag = true;
         }
         return flag;
+    }
+
+    /**
+     * 设置是否可以按返回按钮取消
+     * */
+    public EasyDialog setCancelable(boolean cancelable)
+    {
+        dialog.setCancelable(cancelable);
+        return this;
     }
 }

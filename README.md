@@ -15,12 +15,12 @@ This Project and Demo is open source in github.
         compile 'com.github.michaelye.easydialog:easydialog:1.0'
     }
 
-    View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
-    new EasyDialog(MainActivity.this)
-//                        .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id
+        View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
+        new EasyDialog(MainActivity.this)
+         // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id
             .setLayout(view)
             .setBackgroundColor(MainActivity.this.getResources().getColor(R.color.background_color_black))
-//                        .setLocation(new location[])//point in screen
+         // .setLocation(new location[])//point in screen
             .setLocationByAttachedView(btnTopLeft)
             .setGravity(EasyDialog.GRAVITY_BOTTOM)
             .setAnimationTranslationShow(EasyDialog.DIRECTION_X, 1000, -600, 100, -50, 50, 0)

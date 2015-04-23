@@ -1,16 +1,27 @@
 # EasyDialogDemo
 ## A lightweight, flexible tip dialog in Android
 
+Demo can be download in GooglePlay
+项目可在GooglePlay下载
+
+<a href="https://play.google.com/store/apps/details?id=com.michael.easydialogdemo">
+  <img alt="Android app on Google Play"
+       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+</a>
+
+
 ![](http://ww2.sinaimg.cn/large/97dd5cddjw1erfk00pua1g20hs0qou0y.gif)
 
 
 
 
 
-A lightweight, flexible tip dialog in Android.You can custom the dialog style easily，set the TipView location, background,animations,just only one line code!!!
+A lightweight, flexible tip dialog in Android.You can custom the dialog style easily，set the TipView location, background color,animations,just only one line code!!!
 This Project and Demo is open source in github.
 
-你可以只用一行代码就实现对话框，包括设置对话框的位置，背景和动画等等。
+
+你可以只用一行代码就实现提示对话框，包括设置对话框的位置，背景颜色和动画等等。
+
 
 
 
@@ -19,6 +30,8 @@ This Project and Demo is open source in github.
     dependencies {
         compile 'com.github.michaelye.easydialog:easydialog:1.0'
     }
+    
+    
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)
      // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id

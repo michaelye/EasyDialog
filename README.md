@@ -1,5 +1,5 @@
 # EasyDialogDemo
-A lightweight, flexible tip dialog in Android
+## A lightweight, flexible tip dialog in Android
 
 ![](http://ww2.sinaimg.cn/large/97dd5cddjw1erfk00pua1g20hs0qou0y.gif)
 
@@ -19,7 +19,6 @@ This Project and Demo is open source in github.
     dependencies {
         compile 'com.github.michaelye.easydialog:easydialog:1.0'
     }
-
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)
      // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id

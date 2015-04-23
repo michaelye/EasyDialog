@@ -31,7 +31,7 @@ This Project and Demo is open source in github.
     dependencies {
         compile 'com.github.michaelye.easydialog:easydialog:1.0'
     }
-
+<br/>
 
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)

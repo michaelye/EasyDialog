@@ -2,6 +2,7 @@
 ## A lightweight, flexible tip dialog in Android
 
 Demo can be download in GooglePlay
+
 项目可在GooglePlay下载
 
 <a href="https://play.google.com/store/apps/details?id=com.michael.easydialogdemo">
@@ -30,8 +31,8 @@ This Project and Demo is open source in github.
     dependencies {
         compile 'com.github.michaelye.easydialog:easydialog:1.0'
     }
-    
-    
+
+
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)
      // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id

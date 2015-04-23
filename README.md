@@ -10,7 +10,7 @@ Demo can be download in GooglePlay
 </a>
 
 
-![](http://ww2.sinaimg.cn/large/97dd5cddjw1erfk00pua1g20hs0qou0y.gif)
+![](http://ww3.sinaimg.cn/large/97dd5cddgw1erftuccdgkg20990dw7wh.gif)
 
 
 

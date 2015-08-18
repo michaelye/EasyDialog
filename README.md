@@ -1,4 +1,4 @@
-# EasyDialogDemo
+# EasyDialog
 ## A lightweight, flexible tip dialog in Android
 
 Demo can be download in GooglePlay

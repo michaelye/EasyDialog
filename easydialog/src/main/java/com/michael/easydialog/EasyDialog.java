@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RotateDrawable;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,7 +27,7 @@ import java.util.List;
 
 /**
  * 要你命3000
- *
+ * <p/>
  * Created by michael on 15/4/15.
  */
 public class EasyDialog
@@ -167,7 +168,6 @@ public class EasyDialog
      * 设置三角形所在的位置
      * location.x坐标值为attachedView所在屏幕位置的中心
      * location.y坐标值依据当前的gravity，如果gravity是top，则为控件上方的y值，如果是bottom，则为控件的下方的y值
-     * <p/>
      *
      * @param attachedView 在哪个View显示提示信息
      */
@@ -195,7 +195,7 @@ public class EasyDialog
 
     /**
      * 对话框所依附的View
-     * */
+     */
     private View attachedView = null;
 
     /**
@@ -218,7 +218,7 @@ public class EasyDialog
                 break;
         }
         llContent.setBackgroundResource(R.drawable.round_corner_bg);
-        if(attachedView != null)//如果用户调用setGravity()之前就调用过setLocationByAttachedView，需要再调用一次setLocationByAttachedView
+        if (attachedView != null)//如果用户调用setGravity()之前就调用过setLocationByAttachedView，需要再调用一次setLocationByAttachedView
         {
             this.setLocationByAttachedView(attachedView);
         }
@@ -267,9 +267,9 @@ public class EasyDialog
     }
 
     private int backgroundColor;
+
     /**
      * 设置对话框的颜色
-     * <p/>
      * 三角形的图片是layer-list里面嵌套一个RotateDrawable，在设置颜色的时候需要特别处理
      * http://stackoverflow.com/questions/24492000/set-color-of-triangle-on-run-time
      * http://stackoverflow.com/questions/16636412/change-shape-solid-color-at-runtime-inside-drawable-xml-used-as-background
@@ -282,8 +282,7 @@ public class EasyDialog
         if (shapeTriangle != null)
         {
             shapeTriangle.setColor(color);
-        }
-        else
+        } else
         {
             Toast.makeText(context, "shape is null", Toast.LENGTH_SHORT).show();
         }
@@ -315,16 +314,19 @@ public class EasyDialog
 
     /**
      * 显示对话框的View的parent，如果想自己写动画，可以获取这个实例来写动画
-     *
-     * */
+     */
     public View getTipViewInstance()
     {
         return rlOutsideBackground.findViewById(R.id.rlParentForAnimate);
     }
 
-    /**横向*/
+    /**
+     * 横向
+     */
     public static final int DIRECTION_X = 0;
-    /**纵向*/
+    /**
+     * 纵向
+     */
     public static final int DIRECTION_Y = 1;
 
 
@@ -332,9 +334,9 @@ public class EasyDialog
      * 水平动画
      *
      * @param direction 动画的方向
-     * @param duration 动画执行的时间长度
-     * @param values 动画移动的位置
-     * */
+     * @param duration  动画执行的时间长度
+     * @param values    动画移动的位置
+     */
     public EasyDialog setAnimationTranslationShow(int direction, int duration, float... values)
     {
         return setAnimationTranslation(true, direction, duration, values);
@@ -344,9 +346,9 @@ public class EasyDialog
      * 水平动画
      *
      * @param direction 动画的方向
-     * @param duration 动画执行的时间长度
-     * @param values 动画移动的位置
-     * */
+     * @param duration  动画执行的时间长度
+     * @param values    动画移动的位置
+     */
     public EasyDialog setAnimationTranslationDismiss(int direction, int duration, float... values)
     {
         return setAnimationTranslation(false, direction, duration, values);
@@ -354,7 +356,7 @@ public class EasyDialog
 
     private EasyDialog setAnimationTranslation(boolean isShow, int direction, int duration, float... values)
     {
-        if(direction != DIRECTION_X && direction != DIRECTION_Y)
+        if (direction != DIRECTION_X && direction != DIRECTION_Y)
         {
             direction = DIRECTION_X;
         }
@@ -370,11 +372,10 @@ public class EasyDialog
         }
         ObjectAnimator animator = ObjectAnimator.ofFloat(rlOutsideBackground.findViewById(R.id.rlParentForAnimate), propertyName, values)
                 .setDuration(duration);
-        if(isShow)
+        if (isShow)
         {
             objectAnimatorsForDialogShow.add(animator);
-        }
-        else
+        } else
         {
             objectAnimatorsForDialogDismiss.add(animator);
         }
@@ -385,8 +386,8 @@ public class EasyDialog
      * 对话框出现时候的渐变动画
      *
      * @param duration 动画执行的时间长度
-     * @param values 动画移动的位置
-     * */
+     * @param values   动画移动的位置
+     */
     public EasyDialog setAnimationAlphaShow(int duration, float... values)
     {
         return setAnimationAlpha(true, duration, values);
@@ -396,8 +397,8 @@ public class EasyDialog
      * 对话框消失时候的渐变动画
      *
      * @param duration 动画执行的时间长度
-     * @param values 动画移动的位置
-     * */
+     * @param values   动画移动的位置
+     */
     public EasyDialog setAnimationAlphaDismiss(int duration, float... values)
     {
         return setAnimationAlpha(false, duration, values);
@@ -406,11 +407,10 @@ public class EasyDialog
     private EasyDialog setAnimationAlpha(boolean isShow, int duration, float... values)
     {
         ObjectAnimator animator = ObjectAnimator.ofFloat(rlOutsideBackground.findViewById(R.id.rlParentForAnimate), "alpha", values).setDuration(duration);
-        if(isShow)
+        if (isShow)
         {
             objectAnimatorsForDialogShow.add(animator);
-        }
-        else
+        } else
         {
             objectAnimatorsForDialogDismiss.add(animator);
         }
@@ -425,7 +425,7 @@ public class EasyDialog
 
     private void onDialogShowing()
     {
-        if(animatorSetForDialogShow != null && objectAnimatorsForDialogShow != null && objectAnimatorsForDialogShow.size() > 0)
+        if (animatorSetForDialogShow != null && objectAnimatorsForDialogShow != null && objectAnimatorsForDialogShow.size() > 0)
         {
             animatorSetForDialogShow.playTogether(objectAnimatorsForDialogShow);
             animatorSetForDialogShow.start();
@@ -437,11 +437,11 @@ public class EasyDialog
 
     private void onDialogDismiss()
     {
-        if(animatorSetForDialogDismiss.isRunning())
+        if (animatorSetForDialogDismiss.isRunning())
         {
             return;
         }
-        if(animatorSetForDialogDismiss != null && objectAnimatorsForDialogDismiss != null && objectAnimatorsForDialogDismiss.size() > 0)
+        if (animatorSetForDialogDismiss != null && objectAnimatorsForDialogDismiss != null && objectAnimatorsForDialogDismiss.size() > 0)
         {
             animatorSetForDialogDismiss.playTogether(objectAnimatorsForDialogDismiss);
             animatorSetForDialogDismiss.start();
@@ -456,7 +456,32 @@ public class EasyDialog
                 @Override
                 public void onAnimationEnd(Animator animation)
                 {
-                    dialog.dismiss();
+                    //这里有可能会有bug，当Dialog所依赖的Activity关闭的时候，如果这个时候，用户关闭对话框，由于对话框的动画关闭需要时间，当动画执行完毕后，对话框所依赖的Activity已经被销毁了，执行dismiss()就会报错
+                    if (context != null && context instanceof Activity)
+                    {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+                        {
+                            if (!((Activity) context).isDestroyed())
+                            {
+                                dialog.dismiss();
+                            }
+                        } else
+                        {
+                            try
+                            {
+                                dialog.dismiss();
+                            } catch (final IllegalArgumentException e)
+                            {
+
+                            } catch (final Exception e)
+                            {
+
+                            } finally
+                            {
+                                dialog = null;
+                            }
+                        }
+                    }
                 }
 
                 @Override
@@ -471,8 +496,7 @@ public class EasyDialog
 
                 }
             });
-        }
-        else
+        } else
         {
             dialog.dismiss();
         }
@@ -491,7 +515,6 @@ public class EasyDialog
 
     /**
      * 根据x，y，重新设置控件的位置
-     * <p/>
      * 因为setX setY为0的时候，都是在状态栏以下的，所以app不是全屏的话，需要扣掉状态栏的高度
      */
     private void relocation(int[] location)
@@ -508,7 +531,7 @@ public class EasyDialog
                 break;
         }
         //显示内容的区域往三角形靠拢
-        int triangleCenterX = (int)(ivTriangle.getX() + ivTriangle.getWidth()/2);//三角形的中心点
+        int triangleCenterX = (int) (ivTriangle.getX() + ivTriangle.getWidth() / 2);//三角形的中心点
         int contentWidth = llContent.getWidth();
         int rightMargin = getScreenWidth() - triangleCenterX;//三角形中心距离屏幕右边的距离
         int leftMargin = getScreenWidth() - rightMargin;//三角形中心距离屏幕左边的距离
@@ -516,17 +539,15 @@ public class EasyDialog
         int availableLeftMargin = leftMargin - layoutParams.leftMargin;//左边可用的距离
         int availableRightMargin = rightMargin - layoutParams.rightMargin;//右边可用的距离
         int x = 0;
-        if(contentWidth/2 <= availableLeftMargin && contentWidth/2 <= availableRightMargin)//左右两边有足够的距离
+        if (contentWidth / 2 <= availableLeftMargin && contentWidth / 2 <= availableRightMargin)//左右两边有足够的距离
         {
-            x = triangleCenterX - contentWidth/2;
-        }
-        else
+            x = triangleCenterX - contentWidth / 2;
+        } else
         {
-            if(availableLeftMargin <= availableRightMargin)//判断三角形在屏幕中心的左边
+            if (availableLeftMargin <= availableRightMargin)//判断三角形在屏幕中心的左边
             {
                 x = layoutParams.leftMargin;
-            }
-            else//三角形在屏幕中心的右边
+            } else//三角形在屏幕中心的右边
             {
                 x = getScreenWidth() - (contentWidth + layoutParams.rightMargin);
             }
@@ -536,7 +557,7 @@ public class EasyDialog
 
     /**
      * 获取屏幕的宽度
-     * */
+     */
     private int getScreenWidth()
     {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -573,7 +594,7 @@ public class EasyDialog
 
     /**
      * 设置是否可以按返回按钮取消
-     * */
+     */
     public EasyDialog setCancelable(boolean cancelable)
     {
         dialog.setCancelable(cancelable);

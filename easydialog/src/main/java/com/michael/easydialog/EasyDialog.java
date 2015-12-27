@@ -316,6 +316,10 @@ public class EasyDialog
             {
                 throw new RuntimeException("您是否未调用setLayout()或者setLayoutResourceId()方法来设置要显示的内容呢？");
             }
+            if(llContent.getChildCount() > 0)
+            {
+                llContent.removeAllViews();
+            }
             llContent.addView(contentView);
             dialog.show();
             onDialogShowing();

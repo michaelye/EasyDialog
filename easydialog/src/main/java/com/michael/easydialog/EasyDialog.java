@@ -201,6 +201,11 @@ public class EasyDialog
      */
     private View attachedView = null;
 
+    public View getAttachedView()
+    {
+        return this.attachedView;
+    }
+
     /**
      * 设置显示的内容在上方还是下方，如果设置错误，默认是在下方
      */

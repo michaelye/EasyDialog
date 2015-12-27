@@ -107,7 +107,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         .setAnimationAlphaShow(1000, 0.3f, 1.0f)
                         .setAnimationTranslationDismiss(EasyDialog.DIRECTION_X, 500, -50, 800)
                         .setAnimationAlphaDismiss(500, 1.0f, 0.0f)
-                        .setTouchOutsideDismiss(false)
+                        .setTouchOutsideDismiss(true)
                         .setMatchParent(true)
                         .setMarginLeftAndRight(24, 24)
                         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))

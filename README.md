@@ -29,7 +29,7 @@ This Project and Demo is open source in github.
 ## How to use（如何使用）
 
     dependencies {
-        compile 'com.github.michaelye.easydialog:easydialog:1.1'
+        compile 'com.github.michaelye.easydialog:easydialog:1.2'
     }
 <br/>
 

@@ -3,6 +3,7 @@ package com.michael.easydialog;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -27,7 +28,7 @@ import java.util.List;
 
 /**
  * 要你命3000
- * <p/>
+ *
  * Created by michael on 15/4/15.
  */
 public class EasyDialog
@@ -96,18 +97,7 @@ public class EasyDialog
             }
         });
         rlOutsideBackground = (RelativeLayout) dialogView.findViewById(R.id.rlOutsideBackground);
-        rlOutsideBackground.setOnTouchListener(new View.OnTouchListener()
-        {
-            @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
-                if (touchOutsideDismiss && dialog != null)
-                {
-                    onDialogDismiss();
-                }
-                return false;
-            }
-        });
+        setTouchOutsideDismiss(true);
         ivTriangle = (ImageView) dialogView.findViewById(R.id.ivTriangle);
         llContent = (LinearLayout) dialogView.findViewById(R.id.llContent);
         dialog = new Dialog(context, isFullScreen() ? android.R.style.Theme_Translucent_NoTitleBar_Fullscreen : android.R.style.Theme_Translucent_NoTitleBar);
@@ -118,6 +108,19 @@ public class EasyDialog
         objectAnimatorsForDialogDismiss = new ArrayList<>();
         ini();
     }
+
+    final View.OnTouchListener outsideBackgroundListener = new View.OnTouchListener()
+    {
+        @Override
+        public boolean onTouch(View v, MotionEvent event)
+        {
+            if (touchOutsideDismiss && dialog != null)
+            {
+                onDialogDismiss();
+            }
+            return false;
+        }
+    };
 
     /**
      * 初始化默认值
@@ -254,6 +257,14 @@ public class EasyDialog
     public EasyDialog setTouchOutsideDismiss(boolean touchOutsideDismiss)
     {
         this.touchOutsideDismiss = touchOutsideDismiss;
+        if(touchOutsideDismiss)
+        {
+            rlOutsideBackground.setOnTouchListener(outsideBackgroundListener);
+        }
+        else
+        {
+            rlOutsideBackground.setOnTouchListener(null);
+        }
         return this;
     }
 
@@ -435,6 +446,7 @@ public class EasyDialog
 //        ObjectAnimator.ofFloat(rlOutsideBackground.findViewById(R.id.rlParentForAnimate), "scaleY", 0.3f, 1.0f).setDuration(500).start();
     }
 
+    @SuppressLint("NewApi")
     private void onDialogDismiss()
     {
         if (animatorSetForDialogDismiss.isRunning())

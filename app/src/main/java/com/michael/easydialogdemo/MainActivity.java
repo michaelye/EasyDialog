@@ -60,7 +60,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 location[1] = (int)event.getY();
                 location[1] = location[1] + getActionBarHeight() + getStatusBarHeight();
                 Toast.makeText(MainActivity.this, "x:" + location[0] + " y:" + location[1], Toast.LENGTH_SHORT).show();
+
+//                View easyView = MainActivity.this.getLayoutInflater().inflate(R.layout.layout_tip_list_view, null);
+
                 new EasyDialog(MainActivity.this)
+//                        .setLayout(easyView)
                         .setLayoutResourceId(R.layout.layout_tip_content_horizontal)
                         .setBackgroundColor(MainActivity.this.getResources().getColor(R.color.background_color_black))
                         .setLocation(location)
@@ -70,6 +74,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         .setMarginLeftAndRight(24, 24)
                         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_gray))
                         .show();
+
+//                ListView listView = (ListView) easyView.findViewById(R.id.lvList);
+//                List<String> items = new ArrayList<String>();
+//                for(int i = 0; i < 20; i++)
+//                {
+//                    items.add(""+i);
+//                }
+//                ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, items);
+//                listView.setAdapter(itemsAdapter);
 
                 return false;
             }
@@ -84,15 +97,17 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.btnTopLeft:
                 View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
                 new EasyDialog(MainActivity.this)
+//                        .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id
                         .setLayout(view)
                         .setBackgroundColor(MainActivity.this.getResources().getColor(R.color.background_color_black))
+//                        .setLocation(new location[])//point in screen
                         .setLocationByAttachedView(btnTopLeft)
                         .setGravity(EasyDialog.GRAVITY_BOTTOM)
                         .setAnimationTranslationShow(EasyDialog.DIRECTION_X, 1000, -600, 100, -50, 50, 0)
                         .setAnimationAlphaShow(1000, 0.3f, 1.0f)
                         .setAnimationTranslationDismiss(EasyDialog.DIRECTION_X, 500, -50, 800)
                         .setAnimationAlphaDismiss(500, 1.0f, 0.0f)
-                        .setTouchOutsideDismiss(true)
+                        .setTouchOutsideDismiss(false)
                         .setMatchParent(true)
                         .setMarginLeftAndRight(24, 24)
                         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))

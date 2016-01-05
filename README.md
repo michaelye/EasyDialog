@@ -51,7 +51,9 @@ This Project and Demo is open source in github.
         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))
         .show();
 
+## License
 
+Use and distribution of licensed under the BSD license. See the [LICENSE](https://github.com/michaelye/EasyDialog/blob/master/LICENSE) file for full text.
 
 
 

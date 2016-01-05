@@ -53,7 +53,7 @@ This Project and Demo is open source in github.
 
 ## License
 
-Use and distribution of licensed under the BSD license. See the [LICENSE](https://github.com/michaelye/EasyDialog/blob/master/LICENSE) file for full text.
+Use and distribution of licensed under the Apache2.0 license. See the [LICENSE](https://github.com/michaelye/EasyDialog/blob/master/LICENSE) file for full text.
 
 
 

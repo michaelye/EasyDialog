@@ -43,6 +43,14 @@ public class EasyDialog
      */
     public static final int GRAVITY_BOTTOM = 1;
     /**
+     * 内容在三角形左面
+     */
+    public static final int GRAVITY_LEFT = 2;
+    /**
+     * 内容在三角形右面
+     */
+    public static final int GRAVITY_RIGHT = 3;
+    /**
      * 对话框本身
      */
     private Dialog dialog;
@@ -181,15 +189,21 @@ public class EasyDialog
             this.attachedView = attachedView;
             int[] attachedViewLocation = new int[2];
             attachedView.getLocationOnScreen(attachedViewLocation);
-            attachedViewLocation[0] = attachedViewLocation[0] + attachedView.getWidth() / 2;
             switch (gravity)
             {
                 case GRAVITY_BOTTOM:
-                    attachedViewLocation[1] = attachedViewLocation[1] + attachedView.getHeight();
+                    attachedViewLocation[0] += attachedView.getWidth() / 2;
+                    attachedViewLocation[1] += attachedView.getHeight();
                     break;
                 case GRAVITY_TOP:
-
+                    attachedViewLocation[0] += attachedView.getWidth() / 2;
                     break;
+                case GRAVITY_LEFT:
+                    attachedViewLocation[1] += attachedView.getHeight() / 2;
+                    break;
+                case GRAVITY_RIGHT:
+                    attachedViewLocation[0] += attachedView.getWidth();
+                    attachedViewLocation[1] += attachedView.getHeight() / 2;
             }
             setLocation(attachedViewLocation);
         }
@@ -211,7 +225,7 @@ public class EasyDialog
      */
     public EasyDialog setGravity(int gravity)
     {
-        if (gravity != GRAVITY_BOTTOM && gravity != GRAVITY_TOP)
+        if (gravity != GRAVITY_BOTTOM && gravity != GRAVITY_TOP && gravity != GRAVITY_LEFT && gravity != GRAVITY_RIGHT)
         {
             gravity = GRAVITY_BOTTOM;
         }
@@ -223,6 +237,12 @@ public class EasyDialog
                 break;
             case GRAVITY_TOP:
                 ivTriangle.setBackgroundResource(R.drawable.triangle_top);
+                break;
+            case GRAVITY_LEFT:
+                ivTriangle.setBackgroundResource(R.drawable.triangle_left);
+                break;
+            case GRAVITY_RIGHT:
+                ivTriangle.setBackgroundResource(R.drawable.triangle_right);
                 break;
         }
         llContent.setBackgroundResource(R.drawable.round_corner_bg);
@@ -252,6 +272,14 @@ public class EasyDialog
     {
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) llContent.getLayoutParams();
         layoutParams.setMargins(left, 0, right, 0);
+        llContent.setLayoutParams(layoutParams);
+        return this;
+    }
+
+    public EasyDialog setMarginTopAndBottom(int top, int bottom)
+    {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) llContent.getLayoutParams();
+        layoutParams.setMargins(0, top, 0, bottom);
         llContent.setLayoutParams(layoutParams);
         return this;
     }
@@ -540,40 +568,78 @@ public class EasyDialog
      */
     private void relocation(int[] location)
     {
+        float statusBarHeight = isFullScreen() ? 0.0f : getStatusBarHeight();
+
         ivTriangle.setX(location[0] - ivTriangle.getWidth() / 2);
-        ivTriangle.setY(location[1] - ivTriangle.getHeight() / 2 - (isFullScreen() ? 0.0f : getStatusBarHeight()));//因为三角形是通过XML绘制出来的，可以到activity_tip_overlay.xml中把三角形的那个ImageView背景设置一下，就知道什么情况了。所以需要减掉一半的高度
+        ivTriangle.setY(location[1] - ivTriangle.getHeight() / 2 - statusBarHeight);
         switch (gravity)
         {
             case GRAVITY_BOTTOM:
-                llContent.setY(location[1] - ivTriangle.getHeight() / 2 - (isFullScreen() ? 0.0f : getStatusBarHeight()) + ivTriangle.getHeight());
+                llContent.setY(location[1] - ivTriangle.getHeight() / 2 - statusBarHeight + ivTriangle.getHeight());
                 break;
             case GRAVITY_TOP:
-                llContent.setY(location[1] - llContent.getHeight() - (isFullScreen() ? 0.0f : getStatusBarHeight()) - ivTriangle.getHeight() / 2);
+                llContent.setY(location[1] - llContent.getHeight() - statusBarHeight - ivTriangle.getHeight() / 2);
+                break;
+            case GRAVITY_LEFT:
+                llContent.setX(location[0] - llContent.getWidth() - ivTriangle.getWidth() / 2);
+                break;
+            case GRAVITY_RIGHT:
+                llContent.setX(location[0] + ivTriangle.getWidth() / 2);
                 break;
         }
-        //显示内容的区域往三角形靠拢
-        int triangleCenterX = (int) (ivTriangle.getX() + ivTriangle.getWidth() / 2);//三角形的中心点
-        int contentWidth = llContent.getWidth();
-        int rightMargin = getScreenWidth() - triangleCenterX;//三角形中心距离屏幕右边的距离
-        int leftMargin = getScreenWidth() - rightMargin;//三角形中心距离屏幕左边的距离
+
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) llContent.getLayoutParams();
-        int availableLeftMargin = leftMargin - layoutParams.leftMargin;//左边可用的距离
-        int availableRightMargin = rightMargin - layoutParams.rightMargin;//右边可用的距离
-        int x = 0;
-        if (contentWidth / 2 <= availableLeftMargin && contentWidth / 2 <= availableRightMargin)//左右两边有足够的距离
+        switch (gravity)
         {
-            x = triangleCenterX - contentWidth / 2;
-        } else
-        {
-            if (availableLeftMargin <= availableRightMargin)//判断三角形在屏幕中心的左边
-            {
-                x = layoutParams.leftMargin;
-            } else//三角形在屏幕中心的右边
-            {
-                x = getScreenWidth() - (contentWidth + layoutParams.rightMargin);
-            }
+            case GRAVITY_BOTTOM:
+            case GRAVITY_TOP:
+                int triangleCenterX = (int) (ivTriangle.getX() + ivTriangle.getWidth() / 2);
+                int contentWidth = llContent.getWidth();
+                int rightMargin = getScreenWidth() - triangleCenterX;
+                int leftMargin = getScreenWidth() - rightMargin;
+                int availableLeftMargin = leftMargin - layoutParams.leftMargin;
+                int availableRightMargin = rightMargin - layoutParams.rightMargin;
+                int x = 0;
+                if (contentWidth / 2 <= availableLeftMargin && contentWidth / 2 <= availableRightMargin)
+                {
+                    x = triangleCenterX - contentWidth / 2;
+                } else
+                {
+                    if (availableLeftMargin <= availableRightMargin)
+                    {
+                        x = layoutParams.leftMargin;
+                    } else
+                    {
+                        x = getScreenWidth() - (contentWidth + layoutParams.rightMargin);
+                    }
+                }
+                llContent.setX(x);
+                break;
+            case GRAVITY_LEFT:
+            case GRAVITY_RIGHT:
+                int triangleCenterY = (int) (ivTriangle.getY() + ivTriangle.getHeight() / 2);
+                int contentHeight = llContent.getHeight();
+                int topMargin = triangleCenterY;
+                int bottomMargin = getScreenHeight() - topMargin;
+                int availableTopMargin = topMargin - layoutParams.topMargin;
+                int availableBottomMargin = bottomMargin - layoutParams.bottomMargin;
+                int y = 0;
+                if (contentHeight / 2 <= availableTopMargin && contentHeight / 2 <= availableBottomMargin)
+                {
+                    y = triangleCenterY - contentHeight / 2;
+                } else
+                {
+                    if (availableTopMargin <= availableBottomMargin)
+                    {
+                        y = layoutParams.topMargin;
+                    } else
+                    {
+                        y = getScreenHeight() - (contentHeight + layoutParams.topMargin);
+                    }
+                }
+                llContent.setY(y);
+                break;
         }
-        llContent.setX(x);
     }
 
     /**
@@ -583,6 +649,13 @@ public class EasyDialog
     {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         return metrics.widthPixels;
+    }
+
+    private int getScreenHeight()
+    {
+        int statusBarHeight = isFullScreen() ? 0 : getStatusBarHeight();
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        return metrics.heightPixels - statusBarHeight;
     }
 
     /**

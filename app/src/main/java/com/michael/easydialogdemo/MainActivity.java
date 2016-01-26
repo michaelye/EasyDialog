@@ -22,6 +22,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     private Button btnTopLeft;
     private Button btnTopRight;
     private Button btnMiddleTop;
+    private Button btnMiddleLeft;
+    private Button btnMiddleRight;
     private Button btnMiddleBottom;
     private Button btnBottomLeft;
     private Button btnBottomRight;
@@ -40,6 +42,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         btnTopLeft = (Button) findViewById(R.id.btnTopLeft);
         btnTopRight = (Button) findViewById(R.id.btnTopRight);
         btnMiddleTop = (Button) findViewById(R.id.btnMiddleTop);
+        btnMiddleLeft = (Button) findViewById(R.id.btnMiddleLeft);
+        btnMiddleRight = (Button) findViewById(R.id.btnMiddleRight);
         btnMiddleBottom = (Button) findViewById(R.id.btnMiddleBottom);
         btnBottomLeft = (Button) findViewById(R.id.btnBottomLeft);
         btnBottomRight = (Button) findViewById(R.id.btnBottomRight);
@@ -47,6 +51,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         btnTopLeft.setOnClickListener(this);
         btnTopRight.setOnClickListener(this);
         btnMiddleTop.setOnClickListener(this);
+        btnMiddleLeft.setOnClickListener(this);
+        btnMiddleRight.setOnClickListener(this);
         btnMiddleBottom.setOnClickListener(this);
         btnBottomLeft.setOnClickListener(this);
         btnBottomRight.setOnClickListener(this);
@@ -140,6 +146,32 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         .setMatchParent(false)
                         .setMarginLeftAndRight(24, 24)
                         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_pink))
+                        .show();
+                break;
+            case R.id.btnMiddleLeft:
+                new EasyDialog(MainActivity.this)
+                        .setLayoutResourceId(R.layout.layout_tip_text)
+                        .setBackgroundColor(MainActivity.this.getResources().getColor(R.color.background_color_purple))
+                        .setLocationByAttachedView(btnMiddleLeft)
+                        .setGravity(EasyDialog.GRAVITY_RIGHT)
+                        .setAnimationAlphaShow(300, 0.0f, 1.0f)
+                        .setAnimationAlphaDismiss(300, 1.0f, 0.0f)
+                        .setTouchOutsideDismiss(true)
+                        .setMatchParent(false)
+                        .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_gray))
+                        .show();
+                break;
+            case R.id.btnMiddleRight:
+                new EasyDialog(MainActivity.this)
+                        .setLayoutResourceId(R.layout.layout_tip_text)
+                        .setBackgroundColor(MainActivity.this.getResources().getColor(R.color.background_color_red))
+                        .setLocationByAttachedView(btnMiddleRight)
+                        .setGravity(EasyDialog.GRAVITY_LEFT)
+                        .setAnimationAlphaShow(300, 0.0f, 1.0f)
+                        .setAnimationAlphaDismiss(300, 1.0f, 0.0f)
+                        .setTouchOutsideDismiss(true)
+                        .setMatchParent(false)
+                        .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_gray))
                         .show();
                 break;
             case R.id.btnMiddleBottom:

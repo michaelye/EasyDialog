@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 要你命3000
  *
  * Created by michael on 15/4/15.
  */

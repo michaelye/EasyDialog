@@ -12,7 +12,7 @@ import com.michael.easydialog.EasyDialog;
 
 
 /**
- * This class shows how to use YNM3KDialog
+ * This class shows how to use EasyDialog
  *
  * Created by michael on 15/4/15.
  * */

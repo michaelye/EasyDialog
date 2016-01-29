@@ -17,11 +17,11 @@ Demo can be download in GooglePlay
 A lightweight, flexible tip dialog in Android.You can custom the dialog style easily，set the TipView location, background color,animations,just only one line code!!!
 This Project and Demo is open source in github.
 
-feature<br/>
-"Added left and right gravity" was contributed by [akihiro0228](https://github.com/akihiro0228)
+###Special Thanks<br/>
+Feature "Added left and right gravity" was contributed by [akihiro0228](https://github.com/akihiro0228)
 
 
-## How to use（如何使用）
+## How to use
 
     dependencies {
         compile 'com.github.michaelye.easydialog:easydialog:1.2'

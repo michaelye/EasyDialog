@@ -8,6 +8,8 @@
     <color name="background_color_pink">#e5E7b8f1</color>
     <color name="background_color_yellow">#e5d29b36</color>
     <color name="background_color_brown">#e54c2316</color>
+    <color name="background_color_purple">#e5800080</color>
+    <color name="background_color_red">#e5ff0000</color>
 
     <color name="outside_color_trans">#00000000</color>
     <color name="outside_color_gray">#66444444</color>

@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -109,6 +110,28 @@ public class EasyDialog
         llContent = (LinearLayout) dialogView.findViewById(R.id.llContent);
         dialog = new Dialog(context, isFullScreen() ? android.R.style.Theme_Translucent_NoTitleBar_Fullscreen : android.R.style.Theme_Translucent_NoTitleBar);
         dialog.setContentView(dialogView);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener()
+        {
+            @Override
+            public void onDismiss(DialogInterface dialog)
+            {
+                if(onEasyDialogDismissed != null)
+                {
+                    onEasyDialogDismissed.onDismissed();
+                }
+            }
+        });
+        dialog.setOnShowListener(new DialogInterface.OnShowListener()
+        {
+            @Override
+            public void onShow(DialogInterface dialog)
+            {
+                if(onEasyDialogShow != null)
+                {
+                    onEasyDialogShow.onShow();
+                }
+            }
+        });
         animatorSetForDialogShow = new AnimatorSet();
         animatorSetForDialogDismiss = new AnimatorSet();
         objectAnimatorsForDialogShow = new ArrayList<>();
@@ -128,6 +151,14 @@ public class EasyDialog
             return false;
         }
     };
+
+    /**
+     * The Dialog instance
+     * */
+    public Dialog getDialog()
+    {
+        return dialog;
+    }
 
     /**
      * 初始化默认值
@@ -692,5 +723,37 @@ public class EasyDialog
     {
         dialog.setCancelable(cancelable);
         return this;
+    }
+
+    private OnEasyDialogDismissed onEasyDialogDismissed;
+
+    public EasyDialog setOnEasyDialogDismissed(OnEasyDialogDismissed onEasyDialogDismissed)
+    {
+        this.onEasyDialogDismissed = onEasyDialogDismissed;
+        return this;
+    }
+
+    /**
+     * Dialog is dismissed
+     * */
+    public interface OnEasyDialogDismissed
+    {
+        public void onDismissed();
+    }
+
+    private OnEasyDialogShow onEasyDialogShow;
+
+    public EasyDialog setOnEasyDialogShow(OnEasyDialogShow onEasyDialogShow)
+    {
+        this.onEasyDialogShow = onEasyDialogShow;
+        return this;
+    }
+
+    /**
+     * Dialog is showing
+     * */
+    public interface OnEasyDialogShow
+    {
+        public void onShow();
     }
 }

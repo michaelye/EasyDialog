@@ -13,9 +13,9 @@ import com.michael.easydialog.EasyDialog;
 
 /**
  * This class shows how to use EasyDialog
- *
+ * <p/>
  * Created by michael on 15/4/15.
- * */
+ */
 public class MainActivity extends ActionBarActivity implements View.OnClickListener
 {
     private RelativeLayout rlBackground;
@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void iniComponent()
     {
-        rlBackground = (RelativeLayout)findViewById(R.id.rlBackground);
+        rlBackground = (RelativeLayout) findViewById(R.id.rlBackground);
         btnTopLeft = (Button) findViewById(R.id.btnTopLeft);
         btnTopRight = (Button) findViewById(R.id.btnTopRight);
         btnMiddleTop = (Button) findViewById(R.id.btnMiddleTop);
@@ -62,8 +62,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             public boolean onTouch(View v, MotionEvent event)
             {
                 int[] location = new int[2];
-                location[0] = (int)event.getX();
-                location[1] = (int)event.getY();
+                location[0] = (int) event.getX();
+                location[1] = (int) event.getY();
                 location[1] = location[1] + getActionBarHeight() + getStatusBarHeight();
                 Toast.makeText(MainActivity.this, "x:" + location[0] + " y:" + location[1], Toast.LENGTH_SHORT).show();
 
@@ -132,6 +132,22 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                         .setMatchParent(false)
                         .setMarginLeftAndRight(24, 24)
                         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))
+                        .setOnEasyDialogDismissed(new EasyDialog.OnEasyDialogDismissed()
+                        {
+                            @Override
+                            public void onDismissed()
+                            {
+                                Toast.makeText(MainActivity.this, "dismiss", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setOnEasyDialogShow(new EasyDialog.OnEasyDialogShow()
+                        {
+                            @Override
+                            public void onShow()
+                            {
+                                Toast.makeText(MainActivity.this, "show", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .show();
                 break;
             case R.id.btnMiddleTop:

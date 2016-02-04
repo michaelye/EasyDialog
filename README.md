@@ -24,7 +24,7 @@ Feature "Added left and right gravity" was contributed by [akihiro0228](https://
 ## How to use
 
     dependencies {
-        compile 'com.github.michaelye.easydialog:easydialog:1.3'
+        compile 'com.github.michaelye.easydialog:easydialog:1.4'
     }
 <br/>
 

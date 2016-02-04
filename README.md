@@ -3,33 +3,28 @@
 
 Demo can be download in GooglePlay
 
-项目可在GooglePlay下载
 
 <a href="https://play.google.com/store/apps/details?id=com.michael.easydialogdemo">
   <img alt="Android app on Google Play"
-       src="https://developer.android.com/images/brand/en_app_rgb_wo_45.png" />
+       src="google-play-badge.png" />
 </a>
 
 
-![](http://ww3.sinaimg.cn/large/97dd5cddgw1erftuccdgkg20990dw7wh.gif)
-
-
+![](demo.gif)
 
 
 
 A lightweight, flexible tip dialog in Android.You can custom the dialog style easily，set the TipView location, background color,animations,just only one line code!!!
 This Project and Demo is open source in github.
 
-
-你可以只用一行代码就实现提示对话框，包括设置对话框的位置，背景颜色和动画等等。
-
-
+###Special Thanks<br/>
+Feature "Added left and right gravity" was contributed by [akihiro0228](https://github.com/akihiro0228)
 
 
-## How to use（如何使用）
+## How to use
 
     dependencies {
-        compile 'com.github.michaelye.easydialog:easydialog:1.2'
+        compile 'com.github.michaelye.easydialog:easydialog:1.3'
     }
 <br/>
 

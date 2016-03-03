@@ -23,11 +23,14 @@ Feature "Added left and right gravity" was contributed by [akihiro0228](https://
 
 ## How to use
 
-    dependencies {
-        compile 'com.github.michaelye.easydialog:easydialog:1.4'
-    }
-<br/>
+```groovy
+dependencies {
+  compile 'com.github.michaelye.easydialog:easydialog:1.4'
+}
+```
 
+<br/>
+```java
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)
      // .setLayoutResourceId(R.layout.layout_tip_content_horizontal)//layout resource id
@@ -45,7 +48,7 @@ Feature "Added left and right gravity" was contributed by [akihiro0228](https://
         .setMarginLeftAndRight(24, 24)
         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))
         .show();
-
+```
 ## License
 
 Use and distribution of licensed under the Apache2.0 license. See the [LICENSE](https://github.com/michaelye/EasyDialog/blob/master/LICENSE) file for full text.

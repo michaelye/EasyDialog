@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="easy_dialog_default_left_margin">12dp</dimen>
+    <dimen name="easy_dialog_default_right_margin">12dp</dimen>
+</resources>

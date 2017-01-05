@@ -83,6 +83,9 @@ public class EasyDialog
      */
     private RelativeLayout rlOutsideBackground;
 
+    private int defaultLeftMargin;
+    private int defaultRightMargin;
+
     public EasyDialog(Context context)
     {
         initDialog(context);
@@ -136,6 +139,8 @@ public class EasyDialog
         animatorSetForDialogDismiss = new AnimatorSet();
         objectAnimatorsForDialogShow = new ArrayList<>();
         objectAnimatorsForDialogDismiss = new ArrayList<>();
+        defaultLeftMargin = context.getResources().getDimensionPixelOffset(R.dimen.easy_dialog_default_left_margin);
+        defaultRightMargin = context.getResources().getDimensionPixelOffset(R.dimen.easy_dialog_default_right_margin);
         ini();
     }
 
@@ -171,7 +176,7 @@ public class EasyDialog
                 .setOutsideColor(Color.TRANSPARENT)
                 .setBackgroundColor(Color.BLUE)
                 .setMatchParent(true)
-                .setMarginLeftAndRight(24, 24);
+                .setMarginLeftAndRight(defaultLeftMargin, defaultRightMargin);
     }
 
     /**

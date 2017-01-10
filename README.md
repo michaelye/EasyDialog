@@ -20,6 +20,8 @@ This Project and Demo is open source in github.
 ###Special Thanks<br/>
 Feature "Added left and right gravity" was contributed by [akihiro0228](https://github.com/akihiro0228)
 
+Issue "The triangle's right margin is not suitable on low density screens" was contributed by [vigilancer](https://github.com/vigilancer)
+
 
 ## How to use
 

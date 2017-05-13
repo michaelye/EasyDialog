@@ -32,6 +32,7 @@ dependencies {
 ```
 
 <br/>
+
 ```java
      View view = this.getLayoutInflater().inflate(R.layout.layout_tip_content_horizontal, null);
      new EasyDialog(MainActivity.this)
@@ -51,6 +52,7 @@ dependencies {
         .setOutsideColor(MainActivity.this.getResources().getColor(R.color.outside_color_trans))
         .show();
 ```
+
 ## License
 
 Use and distribution of licensed under the Apache2.0 license. See the [LICENSE](https://github.com/michaelye/EasyDialog/blob/master/LICENSE) file for full text.

@@ -8,12 +8,19 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RotateDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -86,7 +93,7 @@ public class EasyDialog
     private int defaultLeftMargin;
     private int defaultRightMargin;
 
-    private int cornerRadius = 0;
+    private int cornerRadius = convertPx(5);
 
     public EasyDialog(Context context)
     {
@@ -402,13 +409,18 @@ public class EasyDialog
             }
 
             if (cornerRadius > 0) {
-                GradientDrawable gradientDrawable = new GradientDrawable();
+                Drawable tempDrawable = context.getResources().getDrawable(R.drawable.round_corner_bg);
+                GradientDrawable gradientDrawable = (GradientDrawable) tempDrawable;
+
                 gradientDrawable.setCornerRadius(cornerRadius);
+                gradientDrawable.setColor(backgroundColor);
+
                 if (Build.VERSION.SDK_INT >= 16) {
                     llContent.setBackground(gradientDrawable);
                 } else {
                     llContent.setBackgroundDrawable(gradientDrawable);
                 }
+                llContent.invalidate();
             }
 
             llContent.addView(contentView);
@@ -783,5 +795,10 @@ public class EasyDialog
     public interface OnEasyDialogShow
     {
         public void onShow();
+    }
+
+    private int convertPx(int valueInPixels) {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInPixels, metrics);
     }
 }

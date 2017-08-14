@@ -86,6 +86,8 @@ public class EasyDialog
     private int defaultLeftMargin;
     private int defaultRightMargin;
 
+    private int cornerRadius = 0;
+
     public EasyDialog(Context context)
     {
         initDialog(context);
@@ -280,7 +282,7 @@ public class EasyDialog
                 ivTriangle.setBackgroundResource(R.drawable.triangle_right);
                 break;
         }
-        llContent.setBackgroundResource(R.drawable.round_corner_bg);
+
         if (attachedView != null)//如果用户调用setGravity()之前就调用过setLocationByAttachedView，需要再调用一次setLocationByAttachedView
         {
             this.setLocationByAttachedView(attachedView);
@@ -374,6 +376,16 @@ public class EasyDialog
     }
 
     /**
+     *
+     * @param cornerRadius in pixel value
+     * @return dialog instance
+     */
+    public EasyDialog setCornerRadius(int cornerRadius) {
+        this.cornerRadius = cornerRadius;
+        return this;
+    }
+
+    /**
      * 显示提示框
      */
     public EasyDialog show()
@@ -388,6 +400,17 @@ public class EasyDialog
             {
                 llContent.removeAllViews();
             }
+
+            if (cornerRadius > 0) {
+                GradientDrawable gradientDrawable = new GradientDrawable();
+                gradientDrawable.setCornerRadius(cornerRadius);
+                if (Build.VERSION.SDK_INT >= 16) {
+                    llContent.setBackground(gradientDrawable);
+                } else {
+                    llContent.setBackgroundDrawable(gradientDrawable);
+                }
+            }
+
             llContent.addView(contentView);
             dialog.show();
             onDialogShowing();

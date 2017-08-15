@@ -387,7 +387,8 @@ public class EasyDialog
      * @param cornerRadius in pixel value
      * @return dialog instance
      */
-    public EasyDialog setCornerRadius(int cornerRadius) {
+    public EasyDialog setCornerRadius(int cornerRadius)
+    {
         this.cornerRadius = cornerRadius;
         return this;
     }
@@ -408,16 +409,19 @@ public class EasyDialog
                 llContent.removeAllViews();
             }
 
-            if (cornerRadius > 0) {
+            if (cornerRadius > 0)
+            {
                 Drawable tempDrawable = context.getResources().getDrawable(R.drawable.round_corner_bg);
                 GradientDrawable gradientDrawable = (GradientDrawable) tempDrawable;
 
                 gradientDrawable.setCornerRadius(cornerRadius);
                 gradientDrawable.setColor(backgroundColor);
 
-                if (Build.VERSION.SDK_INT >= 16) {
+                if (Build.VERSION.SDK_INT >= 16)
+                {
                     llContent.setBackground(gradientDrawable);
-                } else {
+                } else
+                {
                     llContent.setBackgroundDrawable(gradientDrawable);
                 }
                 llContent.invalidate();
@@ -797,7 +801,8 @@ public class EasyDialog
         public void onShow();
     }
 
-    private int convertPx(int valueInPixels) {
+    private int convertPx(int valueInPixels)
+    {
         DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInPixels, metrics);
     }

@@ -8,12 +8,19 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RotateDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -85,6 +92,8 @@ public class EasyDialog
 
     private int defaultLeftMargin;
     private int defaultRightMargin;
+
+    private int cornerRadius = convertPx(5);
 
     public EasyDialog(Context context)
     {
@@ -280,7 +289,7 @@ public class EasyDialog
                 ivTriangle.setBackgroundResource(R.drawable.triangle_right);
                 break;
         }
-        llContent.setBackgroundResource(R.drawable.round_corner_bg);
+
         if (attachedView != null)//如果用户调用setGravity()之前就调用过setLocationByAttachedView，需要再调用一次setLocationByAttachedView
         {
             this.setLocationByAttachedView(attachedView);
@@ -374,6 +383,17 @@ public class EasyDialog
     }
 
     /**
+     *
+     * @param cornerRadius in pixel value
+     * @return dialog instance
+     */
+    public EasyDialog setCornerRadius(int cornerRadius)
+    {
+        this.cornerRadius = cornerRadius;
+        return this;
+    }
+
+    /**
      * 显示提示框
      */
     public EasyDialog show()
@@ -388,6 +408,25 @@ public class EasyDialog
             {
                 llContent.removeAllViews();
             }
+
+            if (cornerRadius > 0)
+            {
+                Drawable tempDrawable = context.getResources().getDrawable(R.drawable.round_corner_bg);
+                GradientDrawable gradientDrawable = (GradientDrawable) tempDrawable;
+
+                gradientDrawable.setCornerRadius(cornerRadius);
+                gradientDrawable.setColor(backgroundColor);
+
+                if (Build.VERSION.SDK_INT >= 16)
+                {
+                    llContent.setBackground(gradientDrawable);
+                } else
+                {
+                    llContent.setBackgroundDrawable(gradientDrawable);
+                }
+                llContent.invalidate();
+            }
+
             llContent.addView(contentView);
             dialog.show();
             onDialogShowing();
@@ -760,5 +799,11 @@ public class EasyDialog
     public interface OnEasyDialogShow
     {
         public void onShow();
+    }
+
+    private int convertPx(int valueInPixels)
+    {
+        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInPixels, metrics);
     }
 }
